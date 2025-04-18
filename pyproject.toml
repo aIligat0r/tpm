@@ -1,0 +1,30 @@
+[project]
+name = "tpm"
+version = "0.1.0"
+description = "Telegram preview page parser"
+authors = [{name = "Your Name",email = "you@example.com"}]
+readme = "README.md"
+requires-python = ">=3.12"
+packages = [{ include = "src" }, { include = "commands" }]
+
+[tool.poetry.scripts]
+tpm = "commands.cli:app"
+
+[tool.poetry.dependencies]
+httpx = "^0.28.1"
+bs4 = "^0.0.2"
+structlog = "^25.2.0"
+typer = "^0.15.2"
+retry = "^0.9.2"
+python-dotenv = "^1.1.0"
+html5lib = "^1.1"
+aiosqlite = "^0.21.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.5"
+pre-commit = "^4.2.0"
+mypy = "^1.15.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

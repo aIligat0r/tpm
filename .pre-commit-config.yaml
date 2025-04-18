@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: poetry run mypy --install-types --non-interactive --pretty --disable-error-code=import-not-found --disable-error-code=import-untyped --explicit-package-bases
+        language: system
+        types: [file, python]
+        exclude: 'tests/.*'
+      - id: ruff
+        name: ruff
+        entry: poetry run ruff check --fix
+        language: system
+        types: [file, python]
+      - id: ruff-format
+        name: ruff-format
+        entry: poetry run ruff format
+        language: system
+        types: [file, python]
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []

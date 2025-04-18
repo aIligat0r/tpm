@@ -1,0 +1,10 @@
+aiosqlite==0.21.0
+bs4==0.0.2
+html5lib==1.1
+httpx==0.28.1
+mypy==1.15.0
+pre_commit==4.2.0
+ruff==0.11.6
+structlog==25.2.0
+typer==0.15.2
+retry==0.9.2
