@@ -78,7 +78,12 @@ $ mkdir ~/tpm_data/  # create a folder for data
 $ cp /path/to/channel/usernames.txt ~/tpm_data/usernames.txt  #  copy the file with the user names to the previously created folder
 $ chmod 666 ~/tpm_data_dir/telegram_messages.sqlite && chmod 666 ~/tpm_data_dir/usernames.txt  # grant access to use this folder from the container
 ```
-
+```bash
+docker run -it --rm \
+    -v ~/tpm_data_dir/telegram_messages.sqlite:/data/telegram_messages.sqlite \
+    -v ~/tpm_data_dir/usernames.txt:/data/usernames.txt \
+    tpm --db-path /data/telegram_messages.sqlite --chf /data/usernames.txt
+```
 ## 🗃️ Database Structure
 
 The tables will be named as usernames. Each table is a username that was passed in the running parameters.
