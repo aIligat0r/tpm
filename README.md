@@ -52,13 +52,13 @@ poetry install
 
 #### 2. Launching the app
 
-| Options                           | Description                                                           | Required                                                           |
-|-----------------------------------|-----------------------------------------------------------------------|--------------------------------------------------------------------|
-| `--db-path`                       | Path to the base (if not, it will be created)                         | ❌ required                                                         |
-| `--channels-filepath`/`--ch-file` | File of channel usernames (file where in each line Telegram username) | ❌ required (or usernames `--channel`/`--ch`)                       |
-| `--channel`/`--ch`                | List of usernames that are passed by the parameter                    | ❌ required (or file of channels `--channels-filepath`/`--ch-file`) |
-| `--verbose`/`--v`                 | Verbose mode                                                          | ➖                                                                  |
-| `--help`/`--h`                    | Help information                                                      | ➖                                                                  |
+| Options                           | Description                                                           | Required                                                       |
+|-----------------------------------|-----------------------------------------------------------------------|----------------------------------------------------------------|
+| `--db-path`                       | Path to the base (if not, it will be created)                         | ❌ required                                                     |
+| `--channels-filepath`/`--ch-file` | File of channel usernames (file where in each line Telegram username) | ❌ required (or usernames `--channel`/`--ch`)                   |
+| `--channel`/`--ch`                | List of usernames that are passed by the parameter                    | ❌ required (or file of channels `--channels-filepath`/`--chf`) |
+| `--verbose`/`--v`                 | Verbose mode                                                          | ➖                                                              |
+| `--help`/`--h`                    | Help information                                                      | ➖                                                              |
 
 **Poetry**:
 ```bash
