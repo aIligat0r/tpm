@@ -25,7 +25,7 @@ pip install telegram-pm
 ```
 
 ## ⚙️ Configuration
-Configurations (file `.env` or `tpm/config.py`)
+Configurations (file `.env` or `telegram_pm/config.py`)
 
 Parsing configurations:
 * `TELEGRAM_PARSE_REPEAT_COUNT` - Number of requests (default `5`). 20 messages per request. (1 iter - last 20 messages)
@@ -43,7 +43,7 @@ HTTP configurations:
 
 Build docker image:
 ```bash
-docker build -t telegram_pm .
+docker build -t tpm .
 ```
 Create poetry env:
 * Install poetry:
@@ -67,15 +67,15 @@ poetry install
 
 **Poetry**:
 ```bash
-poetry run telegram_pm --ch freegaza --ch BREAKINGNewsTG --db-path .\tg.db --v
+poetry run tpm --ch freegaza --ch BREAKINGNewsTG --db-path .\tg.db --v
 ```
 or
 ```bash
-poetry run telegram_pm --channels-filepath /path/to/monitoring_usernames.txt --db-path .\tg.db
+poetry run tpm --channels-filepath /path/to/monitoring_usernames.txt --db-path .\tg.db
 ```
 **Docker**:
 ```bash
-docker run -it --rm telegram_pm --ch freegaza --db-path test_tg.db --v
+docker run -it --rm tpm --ch freegaza --db-path test_tg.db --v
 ```
 or (if you want to transfer usernames in a file, then you need to mount the paths)
 ```bash
