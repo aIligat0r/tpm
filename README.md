@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-Tool for monitoring public Telegram channels available in WEB preview mode
+Telegram monitoring tool for public channels that can be viewed via WEB preview. Extracts data about messages and media files and stores all data in a database. No tokens or bots are required for monitoring. Just launch the app and collect information non-stop in the database.
 
 ## 🌟 Features
 1. [x] Parsing recent messages from public Telegram channels
