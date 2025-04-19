@@ -1,4 +1,4 @@
-from tpm.utils import logger, url, parse
+from telegram_pm.utils import logger, url, parse
 
 
 __all__ = [

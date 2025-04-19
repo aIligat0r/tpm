@@ -4,7 +4,7 @@ import base64
 
 from bs4 import BeautifulSoup, PageElement
 
-from tpm.parsers.tag_options import TagOptions
+from telegram_pm.parsers.tag_options import TagOptions
 
 
 URL_REGEX = re.compile(

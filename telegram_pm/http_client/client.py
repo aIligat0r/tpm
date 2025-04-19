@@ -1,8 +1,8 @@
 import httpx
 from retry import retry
 
-from tpm.utils.logger import logger
-from tpm.config import HttpClientConfig
+from telegram_pm.utils.logger import logger
+from telegram_pm.config import HttpClientConfig
 
 
 class HttpClient:

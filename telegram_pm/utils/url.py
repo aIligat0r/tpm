@@ -1,6 +1,6 @@
 from urllib.parse import urljoin
 
-from tpm.config import TelegramConfig
+from telegram_pm.config import TelegramConfig
 
 
 def build_preview_url(username: str) -> str:

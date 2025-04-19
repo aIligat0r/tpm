@@ -1,12 +1,12 @@
 import typer
 from bs4 import BeautifulSoup, PageElement
 
-from tpm import utils
-from tpm.entities import Post
-from tpm.utils.logger import logger
-from tpm.parsers.base import BaseParser
-from tpm.config import TelegramConfig
-from tpm.parsers.tag_options import PostParseConfig, TagOptions
+from telegram_pm import utils
+from telegram_pm.entities import Post
+from telegram_pm.utils.logger import logger
+from telegram_pm.parsers.base import BaseParser
+from telegram_pm.config import TelegramConfig
+from telegram_pm.parsers.tag_options import PostParseConfig, TagOptions
 
 
 class PostsParser(BaseParser):

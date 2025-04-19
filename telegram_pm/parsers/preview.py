@@ -4,14 +4,14 @@ import httpx
 from bs4 import BeautifulSoup
 from structlog.contextvars import bound_contextvars
 
-from tpm import utils
-from tpm.entities import Post
-from tpm.utils.logger import logger
-from tpm.config import TelegramConfig
-from tpm.parsers.base import BaseParser
-from tpm.parsers.post import PostsParser
-from tpm.http_client.client import HttpClient
-from tpm.database.db import DatabaseProcessor
+from telegram_pm import utils
+from telegram_pm.entities import Post
+from telegram_pm.utils.logger import logger
+from telegram_pm.config import TelegramConfig
+from telegram_pm.parsers.base import BaseParser
+from telegram_pm.parsers.post import PostsParser
+from telegram_pm.http_client.client import HttpClient
+from telegram_pm.database.db import DatabaseProcessor
 
 
 class PreviewParser(BaseParser):

@@ -1,5 +1,5 @@
 [project]
-name = "tpm"
+name = "telegram-pm"
 version = "0.1.0"
 description = "Telegram preview page parser"
 authors = [{name = "Your Name",email = "you@example.com"}]

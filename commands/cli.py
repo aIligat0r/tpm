@@ -2,7 +2,7 @@ from typing import Annotated
 
 import typer
 
-from tpm.run import run_parser
+from telegram_pm.run import run_parser
 
 
 app = typer.Typer()

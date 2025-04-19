@@ -2,9 +2,9 @@ import sys
 import signal
 import asyncio
 
-from tpm.parsers.preview import PreviewParser
-from tpm.utils.logger import logger
-from tpm.config import TelegramConfig
+from telegram_pm.parsers.preview import PreviewParser
+from telegram_pm.utils.logger import logger
+from telegram_pm.config import TelegramConfig
 
 
 class ParserRunner:

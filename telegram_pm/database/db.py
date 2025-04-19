@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 
 import aiosqlite
 
-from tpm.entities import Post
+from telegram_pm.entities import Post
 
 
 class DatabaseProcessor:

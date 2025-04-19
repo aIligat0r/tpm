@@ -12,11 +12,16 @@ Tool for monitoring public Telegram channels available in WEB preview mode
 4. [x] Support for forwarded messages and replies
 5. [x] Configurable data collection parameters
 
+
 ## 🛠 Installation
 1. Ensure Python 3.12+ is installed (recommendation)
 2. Clone repository
 ```bash
    git clone 'https://github.com/aIligat0r/tpm.git'
+```
+or
+```bash
+pip install telegram-pm
 ```
 
 ## ⚙️ Configuration
@@ -38,7 +43,7 @@ HTTP configurations:
 
 Build docker image:
 ```bash
-docker build -t tpm .
+docker build -t telegram_pm .
 ```
 Create poetry env:
 * Install poetry:
@@ -62,15 +67,15 @@ poetry install
 
 **Poetry**:
 ```bash
-poetry run tpm --ch freegaza --ch BREAKINGNewsTG --db-path .\tg.db --v
+poetry run telegram_pm --ch freegaza --ch BREAKINGNewsTG --db-path .\tg.db --v
 ```
 or
 ```bash
-poetry run tpm --channels-filepath /path/to/monitoring_usernames.txt --db-path .\tg.db
+poetry run telegram_pm --channels-filepath /path/to/monitoring_usernames.txt --db-path .\tg.db
 ```
 **Docker**:
 ```bash
-docker run -it --rm tpm --ch freegaza --db-path test_tg.db --v
+docker run -it --rm telegram_pm --ch freegaza --db-path test_tg.db --v
 ```
 or (if you want to transfer usernames in a file, then you need to mount the paths)
 ```bash
@@ -82,7 +87,7 @@ $ chmod 666 ~/tpm_data_dir/telegram_messages.sqlite && chmod 666 ~/tpm_data_dir/
 docker run -it --rm \
     -v ~/tpm_data_dir/telegram_messages.sqlite:/data/telegram_messages.sqlite \
     -v ~/tpm_data_dir/usernames.txt:/data/usernames.txt \
-    tpm --db-path /data/telegram_messages.sqlite --chf /data/usernames.txt
+    telegram_pm --db-path /data/telegram_messages.sqlite --chf /data/usernames.txt
 ```
 ## 🗃️ Database Structure
 
