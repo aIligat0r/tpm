@@ -1,6 +1,6 @@
 [project]
 name = "telegram-pm"
-version = "0.1.2"
+version = "0.1.4"
 description = "Telegram preview page parser"
 authors = [{name = "Your Name",email = "you@example.com"}]
 readme = "README.md"
