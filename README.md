@@ -17,7 +17,7 @@ Telegram monitoring tool for public channels that can be viewed via WEB preview.
 1. Ensure Python 3.12+ is installed (recommendation)
 2. Clone repository
 ```bash
-   git clone 'https://github.com/aIligat0r/tpm.git'
+git clone 'https://github.com/aIligat0r/tpm.git'
 ```
 or
 ```bash
