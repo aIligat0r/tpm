@@ -4,10 +4,9 @@ import httpx
 from bs4 import BeautifulSoup
 from structlog.contextvars import bound_contextvars
 
-from telegram_pm import utils
+from telegram_pm import utils, config
 from telegram_pm.entities import Post
 from telegram_pm.utils.logger import logger
-from telegram_pm.config import TelegramConfig
 from telegram_pm.parsers.base import BaseParser
 from telegram_pm.parsers.post import PostsParser
 from telegram_pm.http_client.client import HttpClient
@@ -24,9 +23,40 @@ class PreviewParser(BaseParser):
         channels: list[str],
         db_path: str,
         verbose: bool = False,
+        tg_before_param_size: int = config.TelegramConfig.before_param_size,
+        tg_iteration_in_preview_count: int = config.TelegramConfig.iteration_in_preview_count,
+        tg_sleep_time_seconds: int = config.TelegramConfig.sleep_time_seconds,
+        tg_sleep_after_error_request: int = config.TelegramConfig.sleep_after_error_request,
+        http_retries: int = config.HttpClientConfig.retries,
+        http_backoff: int = config.HttpClientConfig.backoff,
+        http_timeout: int = config.HttpClientConfig.timeout,
+        http_headers: dict[str, str] = config.HttpClientConfig.headers,
     ):
+        """
+        :param db_path: Path to sqlite database
+        :param channels: Channels list
+        :param verbose: Verbose mode
+        :param tg_before_param_size: 20 messages per request. (1 iter - last 20 messages)
+        :param tg_iteration_in_preview_count: Number of requests (default 5). 20 messages per request. (1 iter - last 20 messages)
+        :param tg_sleep_time_seconds:  Number of seconds after which the next process of receiving data from channels will begin (default 60 seconds)
+        :param tg_sleep_after_error_request: Waiting after a failed requests (default 30)
+        :param http_retries: Number of repeated request attempts (default 3)
+        :param http_backoff: Delay between attempts for failed requests (default 3 seconds)
+        :param http_timeout: Waiting for a response (default 30 seconds)
+        :param http_headers: HTTP headers
+        """
+        self._tg_sleep_after_error_request = tg_sleep_after_error_request
+        self._tg_sleep_time_seconds = tg_sleep_time_seconds
+        self._tg_iteration_in_preview_count = tg_iteration_in_preview_count
+        self._tg_before_param_size = tg_before_param_size
+
         self.channels: list[str] = channels
-        self.http_client = HttpClient()
+        self.http_client = HttpClient(
+            retries=http_retries,
+            backoff=http_backoff,
+            timeout=http_timeout,
+            headers=http_headers,
+        )
         self.post_parser = PostsParser(verbose=verbose)
         self.db = DatabaseProcessor(db_path=db_path)
         self._db_initialized = False
@@ -89,7 +119,7 @@ class PreviewParser(BaseParser):
             posts_result = []
             should_break = False
 
-            for parse_repeat in range(TelegramConfig.iteration_in_preview_count):
+            for parse_repeat in range(self._tg_iteration_in_preview_count):
                 if should_break:
                     await logger.ainfo("No new posts yet")
                     break
@@ -98,7 +128,7 @@ class PreviewParser(BaseParser):
                     response = await self._get_preview_page(preview_url=preview_url)
                     if not response:
                         await logger.awarning("Can not get preview page")
-                        await asyncio.sleep(TelegramConfig.sleep_after_error_request)
+                        await asyncio.sleep(self._tg_sleep_after_error_request)
                         continue
 
                     if self.__forbidden_parse_preview(response=response):
@@ -111,7 +141,7 @@ class PreviewParser(BaseParser):
                     if not parsed_posts:
                         await logger.awarning("No posts parsed from preview page")  # type: ignore
                         await self.db.drop_table_if_empty(channel_username)
-                        await asyncio.sleep(TelegramConfig.sleep_after_error_request)
+                        await asyncio.sleep(self._tg_sleep_after_error_request)
                         break
 
                     first_post_exists = await self.db.post_exists(
@@ -127,11 +157,11 @@ class PreviewParser(BaseParser):
                     before_param_number = self.__parse_before_param_value(
                         post_url=parsed_posts[-1].url
                     )
-                    if before_param_number <= TelegramConfig.before_param_size:
-                        before_param_number -= TelegramConfig.before_param_size
+                    if before_param_number <= self._tg_before_param_size:
+                        before_param_number -= self._tg_before_param_size
                     else:
                         before_param_number = (
-                            before_param_number - TelegramConfig.before_param_size
+                            before_param_number - self._tg_before_param_size
                         )
                         if before_param_number <= 0:
                             break

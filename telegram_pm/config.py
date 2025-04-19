@@ -12,6 +12,9 @@ class HttpClientConfig(BaseConfig):
     retries: int = int(environ.get("HTTP_RETRIES", 3))
     backoff: int = int(environ.get("HTTP_BACKOFF", 3))
     timeout: int = int(environ.get("HTTP_TIMEOUT", 30))
+    headers: dict[str, str] = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+    }
 
 
 class TelegramConfig(BaseConfig):

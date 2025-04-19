@@ -65,7 +65,7 @@ poetry install
 | `--verbose`/`--v`                 | Verbose mode                                                          | ➖                                                              |
 | `--help`/`--h`                    | Help information                                                      | ➖                                                              |
 
-**Poetry**:
+**Poetry:**
 ```bash
 poetry run tpm --ch freegaza --ch BREAKINGNewsTG --db-path .\tg.db --v
 ```
@@ -73,7 +73,7 @@ or
 ```bash
 poetry run tpm --channels-filepath /path/to/monitoring_usernames.txt --db-path .\tg.db
 ```
-**Docker**:
+**Docker:**
 ```bash
 docker run -it --rm tpm --ch freegaza --db-path test_tg.db --v
 ```
@@ -89,6 +89,29 @@ docker run -it --rm \
     -v ~/tpm_data_dir/usernames.txt:/data/usernames.txt \
     telegram_pm --db-path /data/telegram_messages.sqlite --chf /data/usernames.txt
 ```
+**Python:**
+```python
+from telegram_pm.run import run_tpm
+
+
+run_tpm(
+    db_path="tg.db",                    # Path to sqlite database
+    channels=["channel1", "channel2"],  # Channels list
+    verbose=True,                       # Verbose mode
+
+    # Configuration (optional)
+    tg_iteration_in_preview_count=5,    # Number of requests (default 5). 20 messages per request. (1 iter - last 20 messages)
+    tg_sleep_time_seconds=60,           # Number of seconds after which the next process of receiving data from channels will begin (default 60 seconds)
+    tg_sleep_after_error_request=30,    # Waiting after a failed requests (default 30)
+    http_retries=3,                     # Number of repeated request attempts (default 3)
+    http_backoff=3,                     # Delay between attempts for failed requests (default 3 seconds)
+    http_timeout=60,                    # Waiting for a response (default 30 seconds)
+    http_headers={                      # HTTP headers
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+    }
+)
+```
+
 ## 🗃️ Database Structure
 
 The tables will be named as usernames. Each table is a username that was passed in the running parameters.

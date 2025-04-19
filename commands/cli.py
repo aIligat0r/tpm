@@ -2,7 +2,7 @@ from typing import Annotated
 
 import typer
 
-from telegram_pm.run import run_parser
+from telegram_pm.run import run_tpm
 
 
 app = typer.Typer()
@@ -63,7 +63,7 @@ def run(
 
     typer.echo("🚀 Run 🚀")
     try:
-        run_parser(channels=channels_list, verbose=verbose, db_path=db_path)
+        run_tpm(channels=channels_list, verbose=verbose, db_path=db_path)
     except KeyboardInterrupt:
         typer.echo("🛑 Stopped 🛑")
 

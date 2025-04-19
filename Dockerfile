@@ -22,4 +22,4 @@ COPY . $WORKDIR
 
 RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
 
-ENTRYPOINT ["tpm"]
+ENTRYPOINT ["telegram-pm"]
