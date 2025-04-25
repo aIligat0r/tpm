@@ -8,7 +8,7 @@ requires-python = ">=3.12"
 packages = [{ include = "src" }, { include = "commands" }]
 
 [tool.poetry.scripts]
-tpm = "commands.cli:app"
+telegram-pm = "commands.cli:app"
 
 [tool.poetry.dependencies]
 httpx = "^0.28.1"
@@ -24,6 +24,7 @@ aiosqlite = "^0.21.0"
 ruff = "^0.11.5"
 pre-commit = "^4.2.0"
 mypy = "^1.15.0"
+pytest = "^8.3.5"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

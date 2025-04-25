@@ -87,7 +87,7 @@ $ chmod 666 ~/tpm_data_dir/telegram_messages.sqlite && chmod 666 ~/tpm_data_dir/
 docker run -it --rm \
     -v ~/tpm_data_dir/telegram_messages.sqlite:/data/telegram_messages.sqlite \
     -v ~/tpm_data_dir/usernames.txt:/data/usernames.txt \
-    telegram_pm --db-path /data/telegram_messages.sqlite --chf /data/usernames.txt
+    tpm --db-path /data/telegram_messages.sqlite --chf /data/usernames.txt
 ```
 **Python:**
 ```python
