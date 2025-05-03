@@ -5,7 +5,7 @@ description = "Telegram preview page parser"
 authors = [{name = "Your Name",email = "you@example.com"}]
 readme = "README.md"
 requires-python = ">=3.12"
-packages = [{ include = "src" }, { include = "commands" }]
+packages = [{ include = "telegram_pm" }, { include = "commands" }]
 
 [tool.poetry.scripts]
 telegram-pm = "commands.cli:app"
