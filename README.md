@@ -57,13 +57,14 @@ poetry install
 
 #### 2. Launching the app
 
-| Options                           | Description                                                           | Required                                                       |
-|-----------------------------------|-----------------------------------------------------------------------|----------------------------------------------------------------|
-| `--db-path`                       | Path to the base (if not, it will be created)                         | ❌ required                                                     |
-| `--channels-filepath`/`--ch-file` | File of channel usernames (file where in each line Telegram username) | ❌ required (or usernames `--channel`/`--ch`)                   |
-| `--channel`/`--ch`                | List of usernames that are passed by the parameter                    | ❌ required (or file of channels `--channels-filepath`/`--chf`) |
-| `--verbose`/`--v`                 | Verbose mode                                                          | ➖                                                              |
-| `--help`/`--h`                    | Help information                                                      | ➖                                                              |
+| Options                       | Description                                                           | Required                                                       |
+|-------------------------------|-----------------------------------------------------------------------|----------------------------------------------------------------|
+| `--db-path`                   | Path to db file (if sqlite). Else path to dir (if csv)                | ❌ required                                                     |
+| `--channels-filepath`/`--chf` | File of channel usernames (file where in each line Telegram username) | ❌ required (or usernames `--channel`/`--ch`)                   |
+| `--channel`/`--ch`            | List of usernames that are passed by the parameter                    | ❌ required (or file of channels `--channels-filepath`/`--chf`) |
+| `--verbose`/`--v`             | Verbose mode                                                          | ➖                                                              |
+| `--format`/`--f`              | Data saving format (csv, sqlite)                                      | ➖                                                              |
+| `--help`/`--h`                | Help information                                                      | ➖                                                              |
 
 **Poetry:**
 ```bash
@@ -95,11 +96,12 @@ from telegram_pm.run import run_tpm
 
 
 run_tpm(
-    db_path="tg.db",                    # Path to sqlite database
+    db_path="tg.db",                    # Path to db file (if sqlite). Else path to dir (if csv)
     channels=["channel1", "channel2"],  # Channels list
     verbose=True,                       # Verbose mode
 
     # Configuration (optional)
+    format="sqlite",                    # Data saving format (csv, sqlite)
     tg_iteration_in_preview_count=5,    # Number of requests (default 5). 20 messages per request. (1 iter - last 20 messages)
     tg_sleep_time_seconds=60,           # Number of seconds after which the next process of receiving data from channels will begin (default 60 seconds)
     tg_sleep_after_error_request=30,    # Waiting after a failed requests (default 30)

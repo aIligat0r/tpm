@@ -10,7 +10,8 @@ from telegram_pm.utils.logger import logger
 from telegram_pm.parsers.base import BaseParser
 from telegram_pm.parsers.post import PostsParser
 from telegram_pm.http_client.client import HttpClient
-from telegram_pm.database.db import DatabaseProcessor
+from telegram_pm.database.sqlite_processor import DatabaseProcessor
+from telegram_pm.database.csv_processor import CSVProcessor
 
 
 class PreviewParser(BaseParser):
@@ -22,6 +23,7 @@ class PreviewParser(BaseParser):
         self,
         channels: list[str],
         db_path: str,
+        format: str = "sqlite",
         verbose: bool = False,
         tg_before_param_size: int = config.TelegramConfig.before_param_size,
         tg_iteration_in_preview_count: int = config.TelegramConfig.iteration_in_preview_count,
@@ -58,9 +60,16 @@ class PreviewParser(BaseParser):
             headers=http_headers,
         )
         self.post_parser = PostsParser(verbose=verbose)
-        self.db = DatabaseProcessor(db_path=db_path)
+        self.db = self.__initial_db(format=format, db_path=db_path)
         self._db_initialized = False
         self.verbose = verbose
+
+    @staticmethod
+    def __initial_db(format: str, db_path: str):
+        if format == "sqlite":
+            return DatabaseProcessor(db_path=db_path)
+        else:
+            return CSVProcessor(csv_dir=db_path)
 
     @staticmethod
     def __forbidden_parse_preview(response: httpx.Response) -> bool:

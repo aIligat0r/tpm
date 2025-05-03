@@ -27,6 +27,7 @@ class ParserRunner:
         self,
         db_path: str,
         channels: list[str],
+        format: str = "sqlite",
         verbose: bool = False,
         tg_before_param_size: int = config.TelegramConfig.before_param_size,
         tg_iteration_in_preview_count: int = config.TelegramConfig.iteration_in_preview_count,
@@ -51,6 +52,7 @@ class ParserRunner:
         :param http_headers: HTTP headers
         """
         parser = PreviewParser(
+            format=format,
             channels=channels,
             verbose=verbose,
             db_path=db_path,
@@ -82,6 +84,7 @@ class ParserRunner:
 def run_tpm(
     db_path: str,
     channels: list[str],
+    format: str,
     verbose: bool = False,
     tg_before_param_size: int = config.TelegramConfig.before_param_size,
     tg_iteration_in_preview_count: int = config.TelegramConfig.iteration_in_preview_count,
@@ -95,6 +98,7 @@ def run_tpm(
     runner = ParserRunner()
     asyncio.run(
         runner.run(
+            format=format,
             channels=channels,
             verbose=verbose,
             db_path=db_path,

@@ -10,7 +10,12 @@ app = typer.Typer()
 
 @app.command(no_args_is_help=True)
 def run(
-    db_path: Annotated[str, typer.Option()],
+    db_path: Annotated[
+        str,
+        typer.Option(
+            help="Path to db file (if sqlite). Else path to dir (if csv)",
+        ),
+    ],
     channels_filepath: str = typer.Option(
         None,
         "--channels-filepath",
@@ -22,6 +27,9 @@ def run(
         "--channel",
         "--ch",
         help="Channel (many channels: --ch username1 --ch username2)",
+    ),
+    format: str = typer.Option(
+        "sqlite", "--format", "--f", help="Data saving format (sqlite, csv)"
     ),
     verbose: bool = typer.Option(
         False,
@@ -63,7 +71,7 @@ def run(
 
     typer.echo("🚀 Run 🚀")
     try:
-        run_tpm(channels=channels_list, verbose=verbose, db_path=db_path)
+        run_tpm(format=format, channels=channels_list, verbose=verbose, db_path=db_path)
     except KeyboardInterrupt:
         typer.echo("🛑 Stopped 🛑")
 
