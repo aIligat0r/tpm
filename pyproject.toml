@@ -1,6 +1,6 @@
 [project]
 name = "telegram-pm"
-version = "0.1.5"
+version = "0.1.5.1"
 description = "Telegram preview page parser"
 authors = [{name = "Your Name",email = "you@example.com"}]
 readme = "README.md"
@@ -29,3 +29,9 @@ pytest = "^8.3.5"
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[project.urls]
+Homepage = "https://github.com/aIligat0r/tpm"
+Repository = "https://github.com/aIligat0r/tpm"
+Issues = "https://github.com/aIligat0r/tpm/issues"
