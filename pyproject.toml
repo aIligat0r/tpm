@@ -1,16 +1,18 @@
-[project]
+[tool.poetry]
 name = "telegram-pm"
-version = "0.1.5.1"
+version = "0.1.5.2"
 description = "Telegram preview page parser"
-authors = [{name = "Your Name",email = "you@example.com"}]
+authors = ["aIligat0r <aIligat0r@none.none>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.12"
-packages = [{ include = "telegram_pm" }, { include = "commands" }]
+homepage = "https://github.com/aIligat0r/tpm"
+repository = "https://github.com/aIligat0r/tpm"
 
 [tool.poetry.scripts]
 telegram-pm = "commands.cli:app"
 
 [tool.poetry.dependencies]
+python = "^3.12"
 httpx = "^0.28.1"
 bs4 = "^0.0.2"
 structlog = "^25.2.0"
@@ -27,11 +29,8 @@ mypy = "^1.15.0"
 pytest = "^8.3.5"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
-[project.urls]
-Homepage = "https://github.com/aIligat0r/tpm"
-Repository = "https://github.com/aIligat0r/tpm"
-Issues = "https://github.com/aIligat0r/tpm/issues"
+[tool.poetry.urls]
+"Issues" = "https://github.com/aIligat0r/tpm/issues"
